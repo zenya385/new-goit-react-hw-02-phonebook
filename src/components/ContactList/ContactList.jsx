@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 
-const ContactList = ({ filterInputHandler, removeUser }) => {
+const ContactList = ({ users, removeUser }) => {
   return (
     <>
       <ul>
-        {filterInputHandler.map((user) => (
+        {users.map((user) => (
           <li key={user.id}>
             <span>{user.name}: </span>
             {user.number}
@@ -19,7 +19,7 @@ const ContactList = ({ filterInputHandler, removeUser }) => {
 };
 
 ContactList.propTypes = {
-  filterInputHandler: PropTypes.arrayOf(
+  users: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
     })

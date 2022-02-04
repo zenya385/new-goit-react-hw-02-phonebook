@@ -1,24 +1,37 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import s from "./ContactForm.css";
-// import { nanoid } from "nanoid";
+import { nanoid } from "nanoid";
 
 class ContactForm extends Component {
   state = {
     name: "",
     number: "",
   };
-
-  // inputId = nanoid();
-
   handleChange = (e) => {
     this.setState({ [e.currentTarget.name]: e.currentTarget.value });
   };
+
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.onSubmit(this.state);
+    const newContact = {
+      ...this.state,
+      id: nanoid(),
+    };
+    // this.props.addContact(newContact);
+    this.props.onSubmit(newContact);
     this.reset();
   };
+
+  // handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const newContact = {
+  //     ...this.state,
+  //     id: nanoid(),
+  //   };
+  //   this.props.addContact(newContact);
+  //   this.reset();
+  // };
 
   reset = () => {
     this.setState({
@@ -29,10 +42,9 @@ class ContactForm extends Component {
   render() {
     return (
       <form className={s.form} onSubmit={this.handleSubmit}>
-        <label htmlFor={this.inputId}>
+        <label>
           Name:
           <input
-            id={this.inputId}
             type="text"
             name="name"
             className={s.name}
@@ -43,10 +55,9 @@ class ContactForm extends Component {
             onChange={this.handleChange}
           />
         </label>
-        <label htmlFor={this.inputId}>
+        <label>
           Number:
           <input
-            id={this.inputId}
             type="tel"
             name="number"
             className={s.number}
